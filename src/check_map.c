@@ -6,7 +6,7 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 11:21:20 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/02/16 16:03:48 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2024/02/19 12:59:01 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,20 +67,22 @@ void	set_map(t_data *map, char *file)
 	line = get_next_line(fd);
 	map->width = ft_strlen(line) - 1;
 	join = ft_strdup(line);
-
 	while (line)
 	{
 		trimmed_line = ft_strtrim(line, "\n");
 		if (map->width != (size_t)ft_strlen(trimmed_line))
 			error_map();
 		map->height++;
-		(free(trimmed_line), free(line));
-		line = get_next_line(fd);
+		(free(trimmed_line), free(line), line = get_next_line(fd));
 		if (line)
 			join = ft_strjoin(join, line);
 	}
-	(free(line), close(fd));
-	map->map = ft_split(join, '\n');
+	(free(line), close(fd), map->map = ft_split(join, '\n'));
+	if (map->width * 40 > 1440 || map->height * 40 > 900)
+	{
+		ft_putstr_fd("Map too big\n", 1);
+		exit(1);
+	}
 }
 
 void	check_arg(t_data *map)
@@ -91,6 +93,8 @@ void	check_arg(t_data *map)
 	i = 0;
 	map->coin_count = 0;
 	map->exit_count = 0;
+	map->coins_collected = 0;
+	map->player_count = 0;
 	while (i < map->height)
 	{
 		j = 0;
@@ -100,17 +104,16 @@ void	check_arg(t_data *map)
 				map->coin_count++;
 			else if (map->map[i][j] == 'E')
 				map->exit_count++;
+			else if (map->map[i][j] == 'P')
+				map->player_count++;
 			j++;
 		}
 		i++;
 	}
-	printf("%d\n", map->exit_count);
-	printf("%d\n", map->coin_count);
-	if (map->exit_count != 1)
-		error_exit_number();
-	if (map->coin_count < 1)
-		error_coin_number();
+	error_arg(map);
 }
+
+
 void	free_map(t_data *map)
 {
 	size_t	i;

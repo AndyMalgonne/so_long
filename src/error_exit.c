@@ -6,7 +6,7 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:23:31 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/02/16 15:53:10 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2024/02/19 08:24:41 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,3 +42,18 @@ void	error_coin_number(void)
 	exit(1);
 }
 
+void	error_player_number(void)
+{
+	ft_putstr_fd("Too many players\n", 1);
+	exit(1);
+}
+
+void	error_arg(t_data * map)
+{
+	if (map->exit_count != 1)
+		error_exit_number();
+	if (map->coin_count < 1)
+		error_coin_number();
+	if (map->player_count > 1)
+		error_player_number();
+}

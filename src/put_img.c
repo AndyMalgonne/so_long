@@ -6,7 +6,7 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:38:50 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/02/15 11:27:36 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2024/02/19 11:29:33 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,14 @@ void	put_image(t_data *map, char c, int x, int y)
 	else if (c == 'C')
 		mlx_put_image_to_window(map->mlx, map->win, map->coin, x, y);
 	else if (c == 'E')
-		mlx_put_image_to_window(map->mlx, map->win, map->exit, x, y);
+	{
+		if (map->coins_collected == 0)
+			mlx_put_image_to_window(map->mlx, map->win, map->exit_2, x, y);
+		else if (map->coins_collected > 0 && map->coins_collected < map->coin_count)
+			mlx_put_image_to_window(map->mlx, map->win, map->exit_1, x, y);
+		else if (map->coins_collected == map->coin_count)
+			mlx_put_image_to_window(map->mlx, map->win, map->exit, x, y);
+	}
 	else if (c == '0')
 		mlx_put_image_to_window(map->mlx, map->win, map->tile, x, y);
 }

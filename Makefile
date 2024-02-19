@@ -45,7 +45,8 @@ SRC := main.c \
 check_map.c \
 error_exit.c \
 put_img.c \
-player.c
+player.c \
+flood_map.c 
 
 SRC 		:= ${strip ${SRC}}
 OBJS 		:= ${patsubst %.c,${OBJS_DIR}/%.o,${SRC}}

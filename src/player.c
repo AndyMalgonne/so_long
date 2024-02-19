@@ -6,7 +6,7 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:55:00 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/02/16 14:58:43 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2024/02/16 17:35:36 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,19 @@ void	move_p(t_data *map, int dx, int dy)
 	if (new_x >= 0 && new_x < map->width && new_y >= 0 && new_y < map->height)
 	{
 		if (map->map[new_y][new_x] == 'E')
-			exit_w(map);
+		{
+			if (map->coins_collected == map->coin_count)
+				exit_w(map);
+			else
+				ft_putstr_fd("You need to collect all the coins first\n", 1);
+		}
 		else if (map->map[new_y][new_x] == '1')
 			ft_putstr_fd("You can't go there\n", 1);
 		else if (map->map[new_y][new_x] == 'C')
+		{
+			map->coins_collected++;
 			z_to_p(map, new_y, new_x);
+		}
 		else
 			z_to_p(map, new_y, new_x);
 	}
