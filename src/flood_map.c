@@ -6,7 +6,7 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:53:59 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/02/19 14:43:31 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2024/02/19 16:21:38 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ static int	set_fmap(t_fmap *fmap, t_data *map)
 	{
 		fmap->map[i] = ft_strdup(map->map[i]);
 		if (!(fmap->map[i]))
-			return (0);
+			return (free_split(fmap->map), 0);
 	}
 	return (1);
 }
+
 
 static void	flood(t_data *map, t_fmap *fmap, size_t x, size_t y)
 {
@@ -56,22 +57,10 @@ int	flood_map(t_data *map)
 
 	if (!set_fmap(&fmap, map))
 		return (0);
-	for (size_t i = 0; fmap.map[i]; i++)
-	{
-		printf("%s\n", fmap.map[i]);
-	}
 	flood(map, &fmap, map->player_x, map->player_y);
-	putchar('\n');
-	for (size_t i = 0; fmap.map[i]; i++)
-	{
-		printf("%s\n", fmap.map[i]);
-	}
+	free_split(fmap.map);
 	if (fmap.coin_count != map->coin_count
 		|| fmap.exit_count != map->exit_count)
 		return (0);
-	printf("coin_count: %d\n", map->coin_count);
-	printf("flood_coin_count: %d\n", fmap.coin_count);
-	printf("exit_count: %d\n", map->exit_count);
-	printf("flood_exit_count: %d\n", fmap.exit_count);
 	return (1);
 }

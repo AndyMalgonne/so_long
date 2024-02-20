@@ -6,7 +6,7 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 14:56:41 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/02/19 14:01:57 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2024/02/20 12:39:03 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 # include "libft.h"
 # include "../libs/minilibx_opengl_20191021/mlx.h"
 # include <mlx.h>
-# include <X11/keysym.h>
-# include <X11/X.h>
 
 typedef struct s_data
 {
@@ -54,8 +52,7 @@ typedef struct s_fmap
 }	t_fmap;
 
 void	set_map(t_data *map, char *file);
-void	check_suffix(char *map_file);
-void	exit_1(t_data *vars, int keycode);
+void	check_suffix(char *map_file, t_data *map);
 int		key_hook(int keycode, t_data *vars);
 int		put_image_window(t_data *map, int x, int y);
 
@@ -70,12 +67,12 @@ void	check_arg(t_data *map);
 void	init_p(t_data *map);
 void	move_p(t_data *map, int dx, int dy);
 // Errors
-void	error_ext(void);
-void	error_map(void);
-void	error_fd(void);
-void	error_exit_number(void);
-void	error_coin_number(void);
-void	error_player_number(void);
+void	error_ext(t_data *map);
+void	error_map(t_data *map);
+void	error_fd(t_data *map);
+void	error_exit_number(t_data *map);
+void	error_coin_number(t_data *map);
+void	error_player_number(t_data *map);
 void	error_arg(t_data *map);
 
 #endif

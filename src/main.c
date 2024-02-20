@@ -6,7 +6,7 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:30:28 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/02/19 14:40:49 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2024/02/20 13:14:22 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,30 +82,46 @@ static int	put_img(t_data *map)
 	return (0);
 }
 
+void	init_map(t_data *map)
+{
+	map->map = NULL;
+	map->width = 0;
+	map->height = 0;
+	map->mlx = NULL;
+	map->win = NULL;
+	map->wall = NULL;
+	map->tile = NULL;
+	map->coin = NULL;
+	map->exit = NULL;
+	map->exit_1 = NULL;
+	map->exit_2 = NULL;
+	map->player = NULL;
+	map->player_count = 0;
+	map->player_x = 0;
+	map->player_y = 0;
+	map->count = 0;
+	map->coin_count = 0;
+	map->exit_count = 0;
+	map->coins_collected = 0;
+}
+
 int	main(int ac, char *av[])
 {
 	t_data	map;
 
 	if (ac == 1 || ac > 2)
-	{
-		ft_putstr_fd("Wrong number of arguments", 1);
-		return (1);
-	}
-
-	map.mlx = mlx_init();
+		return (ft_putstr_fd("Wrong number of arguments\n", 1), 1);
+	(init_map(&map), map.mlx = mlx_init());
 	if (!map.mlx)
-		error_map();
-	check_suffix(av[1]);
+		error_map(&map);
+	check_suffix(av[1], &map);
 	set_map(&map, av[1]);
 	check_arg(&map);
 	check_wall(&map);
 	start_win(&map);
 	init_p(&map);
 	if (!flood_map(&map))
-	{
-		ft_putstr_fd("Map is invalid\n", 1);
-		exit(1);
-	}
+		(ft_putstr_fd("Map is invalid\n", 1), exit(1));
 	put_image_window(&map, 0, 0);
 	mlx_loop_hook(map.mlx, &put_img, &map);
 	mlx_hook(map.win, 2, 0, key_hook, &map);
