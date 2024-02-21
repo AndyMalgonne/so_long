@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
+/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:31:23 by amalgonn          #+#    #+#             */
-/*   Updated: 2024/02/19 16:15:26 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2024/02/20 17:21:19 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,11 @@
 #  define BUFFER_SIZE 2000
 # endif
 
-
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }	t_list;
-
 
 char	*get_next_line(int fd);
 char	*ft_strnjoin(char *s1, char const *s2, size_t new_line);

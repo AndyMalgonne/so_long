@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
+/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 14:56:41 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/02/20 12:39:03 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2024/02/20 17:45:57 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@
 # include <stdlib.h>
 # include <limits.h>
 # include <fcntl.h>
+# include <stdio.h>
 # include "libft.h"
-# include "../libs/minilibx_opengl_20191021/mlx.h"
+# include "../libs/minilibx-linux/mlx.h"
+# include <X11/keysym.h>
+# include <X11/X.h>
 # include <mlx.h>
 
 typedef struct s_data
@@ -56,6 +59,11 @@ void	check_suffix(char *map_file, t_data *map);
 int		key_hook(int keycode, t_data *vars);
 int		put_image_window(t_data *map, int x, int y);
 
+// Events
+int		key_hook(int keysym, t_data *map);
+int		exit_cross(t_data *map);
+void	exit_escape(t_data *map, int keysym);
+
 // Flood
 int		flood_map(t_data *map);
 
@@ -74,5 +82,9 @@ void	error_exit_number(t_data *map);
 void	error_coin_number(t_data *map);
 void	error_player_number(t_data *map);
 void	error_arg(t_data *map);
+void	clean(t_data *data);
+void	error_wall(t_data *map);
+void	error_map_too_big(t_data *map);
+void	flood_error(t_data *map);
 
 #endif

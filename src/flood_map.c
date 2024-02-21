@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
+/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:53:59 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/02/19 16:21:38 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2024/02/20 17:58:52 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,16 @@ static int	set_fmap(t_fmap *fmap, t_data *map)
 	return (1);
 }
 
-
 static void	flood(t_data *map, t_fmap *fmap, size_t x, size_t y)
 {
 	if (fmap->map[y][x] == '1')
 		return ;
 	else if (map->map[y][x] == 'E')
+	{
 		++(fmap->exit_count);
+		(fmap->map[y][x] = '1');
+		return ;
+	}
 	else if (map->map[y][x] == 'C')
 		++(fmap->coin_count);
 	fmap->map[y][x] = '1';

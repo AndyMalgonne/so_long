@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
+/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:55:00 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/02/16 17:35:36 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2024/02/20 18:13:57 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,11 @@ void	init_p(t_data *map)
 
 static void	exit_w(t_data *map)
 {
-	mlx_destroy_window(map->mlx, map->win);
 	ft_putstr_fd("MOVES: ", 1);
 	ft_putnbr_fd(map->count++, 1);
 	ft_putstr_fd("\n", 1);
 	ft_putstr_fd("Good Game\n", 1);
-	exit (0);
+	clean(map);
 }
 
 static void	z_to_p(t_data *map, size_t new_y, size_t new_x)
@@ -84,5 +83,3 @@ void	move_p(t_data *map, int dx, int dy)
 			z_to_p(map, new_y, new_x);
 	}
 }
-
-

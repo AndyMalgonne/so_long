@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
+/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:30:28 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/02/20 13:14:22 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2024/02/20 17:45:06 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <stdio.h>
-
 
 void	start_win(t_data *map)
 {
@@ -33,47 +31,6 @@ void	start_win(t_data *map)
 	map->exit_1 = mlx_xpm_file_to_image(map->mlx, "./img/exit_1.xpm", &w, &h);
 	map->exit_2 = mlx_xpm_file_to_image(map->mlx, "./img/exit_2.xpm", &w, &h);
 	map->tile = mlx_xpm_file_to_image(map->mlx, "./img/tile.xpm", &w, &h);
-}
-
-
-void	exit_escape(t_data *map, int keycode)
-{
-	if (keycode == 53)
-	{
-		mlx_destroy_window(map->mlx, map->win);
-		free(map->mlx);
-		ft_putstr_fd("You exited\n", 1);
-		exit (0);
-	}
-	mlx_destroy_window(map->mlx, map->win);
-	ft_putstr_fd("Good Game\n", 1);
-	exit (0);
-}
-
-int	exit_cross(t_data *map)
-{
-	mlx_destroy_window(map->mlx, map->win);
-	free(map->mlx);
-	ft_putstr_fd("You exited\n", 1);
-	exit (0);
-}
-
-// 126 up 125 down 123 left 124 right
-int	key_hook(int keycode, t_data *map)
-{
-	if (keycode == 53)
-		exit_escape(map, keycode);
-	else if (keycode == 126)
-		move_p(map, 0, -1);
-	else if (keycode == 125)
-		move_p(map, 0, 1);
-	else if (keycode == 123)
-		move_p(map, -1, 0);
-	else if (keycode == 124)
-		move_p(map, 1, 0);
-	mlx_clear_window(map->mlx, map->win);
-	put_image_window(map, 0, 0);
-	return (0);
 }
 
 static int	put_img(t_data *map)
@@ -121,11 +78,11 @@ int	main(int ac, char *av[])
 	start_win(&map);
 	init_p(&map);
 	if (!flood_map(&map))
-		(ft_putstr_fd("Map is invalid\n", 1), exit(1));
+		flood_error(&map);
 	put_image_window(&map, 0, 0);
 	mlx_loop_hook(map.mlx, &put_img, &map);
 	mlx_hook(map.win, 2, 0, key_hook, &map);
+	mlx_hook(map.win, KeyPress, KeyPressMask, key_hook, &map);
 	mlx_hook(map.win, 17, 0, exit_cross, &map);
 	mlx_loop(map.mlx);
 }
-

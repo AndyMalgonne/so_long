@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_img.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
+/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:38:50 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/02/19 17:07:35 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2024/02/20 17:17:45 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	put_image_window(t_data *map, int x, int y)
 	start_y = y;
 	i = 0;
 	j = 0;
-
 	while (i < map->height)
 	{
 		while (map->map[i][j])
