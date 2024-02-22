@@ -1,1 +1,2 @@
-![dummy](https://github.com/AndyMalgonne/so_long/assets/98618203/3c892db6-efa0-4f7a-9dc4-bd5bab9e4c45)
+https://github.com/AndyMalgonne/so_long/assets/98618203/d5b17909-216d-456c-b08d-505b6fcbc847
+
